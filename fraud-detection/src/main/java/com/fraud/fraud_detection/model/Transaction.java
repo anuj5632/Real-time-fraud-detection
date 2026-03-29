@@ -2,7 +2,6 @@ package com.fraud.fraud_detection.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -16,18 +15,25 @@ public class Transaction {
     @GeneratedValue
     private UUID id;
 
+    @Column(nullable = false)
     private UUID userId;
 
+    @Column(nullable = false)
     private double amount;
 
+    @Column(nullable = false)
     private String currency;
 
+    @Column(nullable = false)
     private String location;
 
+    @Column(nullable = false)
     private String deviceId;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TransactionStatus status; // PENDING, SUCCESS, FRAUD
 
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 }
