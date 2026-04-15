@@ -1,0 +1,17 @@
+[
+	{
+		"case_id": "case-001",
+		"summary": "High amount from a new device in an unusual location.",
+		"signal": "new device + location mismatch + high amount"
+	},
+	{
+		"case_id": "case-002",
+		"summary": "Trusted device and typical spend pattern; marked legitimate.",
+		"signal": "trusted device + normal amount"
+	},
+	{
+		"case_id": "case-003",
+		"summary": "Rapid back-to-back transactions; suspected account takeover.",
+		"signal": "velocity spikes"
+	}
+]

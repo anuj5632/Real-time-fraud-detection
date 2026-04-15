@@ -1,0 +1,5 @@
+High-value transactions from a new device are frequently flagged.
+Multiple transactions in a short time window can indicate account takeover.
+Location mismatch with recent activity is a common fraud signal.
+Untrusted devices are higher risk for fraud decisions.
+Transactions marked PENDING for long periods may require review.
