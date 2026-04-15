@@ -1,6 +1,7 @@
 package com.fraud.fraud_detection.service;
 
 import com.fraud.fraud_detection.dto.CreateTransactionRequest;
+import com.fraud.fraud_detection.dto.TransactionEvent;
 import com.fraud.fraud_detection.dto.TransactionResponse;
 import com.fraud.fraud_detection.exception.TransactionNotFoundException;
 import com.fraud.fraud_detection.exception.UserNotFoundException;
@@ -18,10 +19,12 @@ public class TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final UserRepository userRepository;
+    private final TransactionEventProducer transactionEventProducer;
 
-    public TransactionService(TransactionRepository transactionRepository, UserRepository userRepository) {
+    public TransactionService(TransactionRepository transactionRepository, UserRepository userRepository, TransactionEventProducer transactionEventProducer) {
         this.transactionRepository = transactionRepository;
         this.userRepository = userRepository;
+        this.transactionEventProducer = transactionEventProducer;
     }
 
     @Transactional
@@ -38,8 +41,20 @@ public class TransactionService {
         transaction.setDeviceId(request.getDeviceId().trim());
         transaction.setStatus(TransactionStatus.PENDING);
 
-        Transaction saved = transactionRepository.save(transaction);
-        return toResponse(saved);
+        Transaction savedTransaction = transactionRepository.save(transaction);
+
+        TransactionEvent event = TransactionEvent.builder()
+                .transactionId(savedTransaction.getId().toString())
+                .amount(request.getAmount())
+                .location(request.getLocation())
+                .deviceType(request.getDeviceId())
+                .userId(request.getUserId().toString())
+                .timestamp(System.currentTimeMillis())
+                .build();
+
+        transactionEventProducer.sendTransactionEvent(event);
+
+        return toResponse(savedTransaction);
     }
 
     @Transactional(readOnly = true)

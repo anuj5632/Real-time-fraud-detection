@@ -31,11 +31,14 @@ class TransactionServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private TransactionEventProducer transactionEventProducer;
+
     private TransactionService transactionService;
 
     @BeforeEach
     void setUp() {
-        transactionService = new TransactionService(transactionRepository, userRepository);
+        transactionService = new TransactionService(transactionRepository, userRepository, transactionEventProducer);
     }
 
     @Test
