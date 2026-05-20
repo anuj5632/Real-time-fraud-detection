@@ -20,5 +20,5 @@ public class Device {
 
     private boolean isTrusted;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    //private LocalDateTime createdAt = LocalDateTime.now();
 }

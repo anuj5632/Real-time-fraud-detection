@@ -17,7 +17,7 @@ public class TransactionEventProducer {
     @Value("${kafka.topic.transaction-events}")
     private String transactionEventsTopic;
 
-    private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final KafkaTemplate<String, TransactionEvent> kafkaTemplate;
 
     public void sendTransactionEvent(TransactionEvent event){
         CompletableFuture<SendResult<String, TransactionEvent>> future =
