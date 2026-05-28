@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,16 +24,16 @@ public class ModelMetadata {
     private String modelVersion;
 
     @Column(name = "accuracy", precision = 5, scale = 4)
-    private Double accuracy;
+    private BigDecimal accuracy;
 
     @Column(name = "precision_score", precision = 5, scale = 4)
-    private Double precisionScore;
+    private BigDecimal precisionScore;
 
     @Column(name = "recall", precision = 5, scale = 4)
-    private Double recall;
+    private BigDecimal recall;
 
     @Column(name = "f1_score", precision = 5, scale = 4)
-    private Double f1Score;
+    private BigDecimal f1Score;
 
     @Column(name = "trained_at", nullable = false)
     private LocalDateTime trainedAt;

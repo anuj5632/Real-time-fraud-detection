@@ -20,7 +20,7 @@ public class FraudResultConsumer {
     private final TransactionRepository transactionRepository;
 
     @KafkaListener(
-            topics = "${kafka.topic.fraud-results}",
+            topics = "${kafka.topics.fraud-results}",
             groupId = "${spring.kafka.consumer.group-id}"
     )
     public void consumeFraudResult(FraudResultEvent event) {
