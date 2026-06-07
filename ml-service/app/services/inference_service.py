@@ -29,7 +29,7 @@ class InferenceService:
         return "SUCCESS"
 
     def predict_single(self, request: TransactionRequest) -> PredictionResponse:
-        df = pd.DataFrame([to_dict(request)])
+        df = pd.DataFrame([request.model_dump(by_alias=False)])
         probability = float(predict_proba(df).iloc[0])
         decision = self._decision(probability)
 
@@ -42,7 +42,7 @@ class InferenceService:
         )
 
     def predict_batch(self, request: BatchPredictionRequest) -> BatchPredictionResponse:
-        records = [to_dict(tx) for tx in request.transactions]
+        records = [tx.model_dump(by_alias=False) for tx in request.transactions]
         df = pd.DataFrame(records)
         probabilities = predict_proba(df)
 

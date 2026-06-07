@@ -36,3 +36,7 @@ def consume_transactions() -> None:
             producer.publish(payload_out)
         except Exception:
             logger.exception("Failed to process message")
+
+if __name__ == "__main__":
+    logger.info("Starting ML Service Kafka Consumer...")
+    consume_transactions()

@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic
+kafka-python
+python-dotenv
+# RAG specific 
+langchain
+langchain-openai
+chromadb
+openai
